@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "dev": "nodemon --watch src --ext js,ts,json src/server.js",
+    "start": "node src/server.js"
+  }
+}
