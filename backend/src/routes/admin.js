@@ -1,9 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const { authenticate, isAdmin } = require('../middleware/auth');
+const {
+  getAllUsers,
+  toggleUserStatus,
+  getSystemStats,
+  updateSettings,
+} = require('../controllers/adminController');
 
-// Example route
-router.get('/stats', (req, res) => {
-  res.json({ message: 'Admin analytics data working ✅' });
-});
+// All admin routes should be protected
+router.use(authenticate, isAdmin);
 
+router.get('/users', getAllUsers);
+router.put('/users/:id/status', toggleUserStatus);
+router.get('/stats', getSystemStats);
+router.put('/settings', updateSettings);
 module.exports = router;
